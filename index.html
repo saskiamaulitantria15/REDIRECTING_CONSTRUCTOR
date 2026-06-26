@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sesi 11: Redirecting Constructor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+      background: linear-gradient(145deg, #0b1120 0%, #111827 100%);
+      color: #f1f5f9;
+      line-height: 1.5;
+      padding-bottom: 3rem;
+    }
+    header {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.5);
+    }
+    header h1 {
+      font-size: 2.7rem;
+      background: linear-gradient(135deg, #a5f3fc, #60a5fa);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .subhead {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+    }
+    .badge {
+      display: inline-block;
+      background: #1e293b;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(2px);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid #2d3a5e;
+      transition: transform 0.1s ease, box-shadow 0.2s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    .card:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 12px 28px rgba(59, 130, 246, 0.2);
+    }
+    .card h2 {
+      font-size: 1.7rem;
+      margin-bottom: 0.75rem;
+      color: #93c5fd;
+      border-left: 5px solid #3b82f6;
+      padding-left: 1rem;
+    }
+    pre {
+      background: #0f172a;
+      border-radius: 1rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.85rem;
+      border: 1px solid #2d3a5e;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .btn-run {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      margin-top: 0.5rem;
+    }
+    .btn-run:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid #1e293b;
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #0f172a;
+      width: 90%;
+      max-width: 1100px;
+      height: 85%;
+      border-radius: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #3b82f6;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #334155;
+      color: #e2e8f0;
+    }
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+    .close {
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: #94a3b8;
+      line-height: 1;
+    }
+    .close:hover {
+      color: white;
+    }
+    .modal-body {
+      flex: 1;
+      padding: 0.5rem;
+    }
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 1rem;
+      background: #fefefe;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Redirecting Constructor</h1>
+  <p class="subhead">Sesi 11 </p>
+  <div class="badge">👩‍💻 Saskia Mauli Tantria | 251410034 | SI2A</div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Main Constructor dengan Radius </h2>
+    <p>Main constructor merupakan constructor utama pada kelas Circle </p>
+    <p>yang menerima nilai radius secara langsung saat objek dibuat. Constructor</p>
+    <p>ini menjadi pusat inisialisasi data lingkaran dan digunakan oleh </p>
+    <p>constructor lain yang melakukan redirect.</p>
+    <pre><code>//Nama: Saskia Mauli Tantria 
+//NIM: 251410034
+//Kelas: SI2A
+
+class Circle {
+  final double radius;
+
+  Circle(this.radius);
+
+  @override
+  String toString() {
+    return 'Lingkaran dengan radius $radius';
+  }
+}
+
+void main() {
+  var lingkaran = Circle(10);
+
+  print(lingkaran);
+}</code></pre>
+    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=ef5fa6d22a3180805cad6e7b10e17267&amp;run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>Redirecting dari Diameter</h2>
+    <p>Redirecting constructor dari diameter adalah constructor yang digunakan </p>
+    <p>untuk membuat objek Circle berdasarkan nilai diameter. Nilai </p>
+    <p>diameter akan diubah menjadi radius terlebih dahulu, kemudian diteruskan ke </p>
+    <p>constructor utama menggunakan this().</p>
+    <pre><code>//Nama: Saskia Mauli Tantria 
+//NIM: 251410034
+//Kelas: SI2A
+
+class Circle {
+  final double radius;
+
+  Circle(this.radius);
+
+  Circle.dariDiameter(double diameter)
+      : this(diameter / 2);
+
+  @override
+  String toString() {
+    return 'Lingkaran dengan radius $radius';
+  }
+}
+
+void main() {
+  var lingkaran = Circle.dariDiameter(20);
+
+  print(lingkaran);
+}</code></pre>
+    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=965feb03974bd3b2d1843afd768c9f46&amp;run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>Redirecting dari Keliling</h2>
+    <p>Redirecting constructor dari keliling adalah constructor yang digunakan  </p>
+    <p>untuk membuat objek Circle berdasarkan nilai keliling lingkaran. </p>
+    <p>Radius dihitung dari keliling menggunakan rumus matematika, lalu </p>
+    <p>hasilnya diteruskan ke constructor utama.</p>
+    <pre><code>//Nama: Saskia Mauli Tantria 
+//NIM: 251410034
+//Kelas: SI2A
+
+import 'dart:math';
+
+class Circle {
+  final double radius;
+
+  Circle(this.radius);
+
+  Circle.dariKeliling(double keliling)
+      : this(keliling / (2 * pi));
+
+  @override
+  String toString() {
+    return 'Lingkaran dengan radius $radius';
+  }
+}
+
+void main() {
+  var lingkaran = Circle.dariKeliling(62.8);
+
+  print(lingkaran);
+}</code></pre>
+    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=a99f708f738b0ddbea152b08d96b930a&amp;run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>Redirecting dari Luas</h2>
+    <p>Redirecting constructor dari luas adalah constructor yang digunakan untuk </p>
+    <p>membuat objek Circle berdasarkan nilai luas lingkaran. Radius diperoleh dari </p>
+    <p>hasil perhitungan luas lingkaran dan kemudian digunakan untuk memanggil </p>
+    <p>constructor utama melalui this().</p>
+    <pre><code>//Nama: Saskia Mauli Tantria 
+//NIM: 251410034
+//Kelas: SI2A
+
+import 'dart:math';
+
+class Circle {
+  final double radius;
+
+  Circle(this.radius);
+
+  Circle.dariLuas(double luas)
+      : this(sqrt(luas / pi));
+
+  @override
+  String toString() {
+    return 'Lingkaran dengan radius $radius';
+  }
+}
+
+void main() {
+  var lingkaran = Circle.dariLuas(314);
+
+  print(lingkaran);
+}</code></pre>
+    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=062017c82fccd3962a8a78bed6f9b583&amp;run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>Implementasi Lengkap Redirecting Constructor pada Class Circle</h2>
+    <p>Class Circle adalah class yang digunakan untuk merepresentasikan objek lingkaran.</p>
+    <p>Class ini memiliki satu constructor utama yang menerima nilai radius dan tiga redirecting constructor </p>
+    <p>yang dapat membuat objek berdasarkan diameter, keliling, dan luas. Redirecting constructor menggunakan sintaks :</p>
+    <p>this(...) untuk mengarahkan proses pembuatan objek ke constructor utama sehingga kode menjadi lebih ringkas dan</p>
+    <p>menghindari duplikasi.</p>
+    <pre><code>//Nama: Saskia Mauli Tantria 
+//NIM: 251410034
+//Kelas: SI2A
+
+import 'dart:math';
+
+class Circle {
+  final double radius;
+
+  // Main constructor
+  Circle(this.radius);
+
+  // Redirecting constructor dari diameter
+  Circle.dariDiameter(double diameter)
+      : this(diameter / 2);
+
+  // Redirecting constructor dari keliling
+  Circle.dariKeliling(double keliling)
+      : this(keliling / (2 * pi));
+
+  // Redirecting constructor dari luas
+  Circle.dariLuas(double luas)
+      : this(sqrt(luas / pi));
+
+  @override
+  String toString() {
+    return 'Lingkaran dengan radius $radius';
+  }
+}
+
+void main() {
+  var lingkaran1 = Circle(10);
+  var lingkaran2 = Circle.dariDiameter(20);
+  var lingkaran3 = Circle.dariKeliling(62.8);
+  var lingkaran4 = Circle.dariLuas(314);
+
+  print('Main Constructor');
+  print(lingkaran1);
+
+  print('\nRedirecting dari Diameter');
+  print(lingkaran2);
+
+  print('\nRedirecting dari Keliling');
+  print(lingkaran3);
+
+  print('\nRedirecting dari Luas');
+  print(lingkaran4);
+}</code></pre>
+    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=9f7023f861a3476ec824178377c53703&amp;run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>Kesimpulan</h2>
+    <p>- Redirecting Constructor adalah constructor yang digunakan untuk memanggil constructor lain yang berada</p>
+    <p> dalam class yang sama dengan menggunakan sintaks : this(...).</p>
+    <p>- Constructor ini membantu menghindari penulisan kode yang berulang pada proses inisialisasi objek. </p>
+    <p>- Redirecting Constructor tidak memiliki body karena hanya bertugas meneruskan parameter ke constructor yang dituju.</p>
+    <p>- Constructor ini sering digunakan untuk membuat beberapa cara pembuatan objek dalam satu class.</p>
+    <p>- Penggunaannya membuat kode lebih ringkas, terorganisir, dan lebih mudah dipelihara.</p>
+    <p>- Redirecting Constructor mendukung prinsip DRY (Don't Repeat Yourself) dengan mengurangi duplikasi kode.</p>
+  </div>
+</div>
+
+<footer>
+  <p>📁 Sesi 11  – | Dibuat untuk GitHub Pages</p>
+  <p>Saskia Mauli Tantria — 251410034 — SI2A</p>
+</footer>
+
+<div id="codeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">DartPad Runner</h3>
+      <span class="close" id="closeModalBtn">&times;</span>
+    </div>
+    <div class="modal-body">
+      <iframe id="dartpadIframe" title="DartPad" src="about:blank"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('codeModal');
+  const modalIframe = document.getElementById('dartpadIframe');
+  const closeBtn = document.getElementById('closeModalBtn');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.querySelector('.modal-body');
+
+  function openDartPad(embedUrl, programTitle) {
+    while (modalBody.firstChild) {
+      modalBody.removeChild(modalBody.firstChild);
+    }
+    modalIframe.style.display = 'block';
+    modalBody.appendChild(modalIframe);
+    modalIframe.src = embedUrl;
+    modalTitle.innerText = programTitle;
+    modal.style.display = 'flex';
+  }
+
+  window.openImage = function(imgUrl) {
+    while (modalBody.firstChild) {
+      modalBody.removeChild(modalBody.firstChild);
+    }
+    modalIframe.style.display = 'none';
+    const img = document.createElement('img');
+    img.src = imgUrl;
+    img.alt = 'Capture Gambar';
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '70vh';
+    img.style.width = 'auto';
+    img.style.height = 'auto';
+    img.style.display = 'block';
+    img.style.margin = 'auto';
+    img.style.borderRadius = '12px';
+    img.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+    img.style.objectFit = 'contain';
+    img.onerror = () => {
+      img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2"%3E%3Crect x="2" y="2" width="20" height="20" rx="2" /%3E%3Cpath d="M8 8 L16 16 M16 8 L8 16" /%3E%3Ctext x="12" y="20" font-size="8" text-anchor="middle" fill="red"%3EGagal load%3C/text%3E%3C/svg%3E';
+      img.style.width = '150px';
+      img.style.height = 'auto';
+    };
+    modalBody.appendChild(img);
+    modalTitle.innerText = '📸 Capture Gambar';
+    modal.style.display = 'flex';
+  };
+
+  document.querySelectorAll('.btn-run').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const src = btn.getAttribute('data-src');
+      if (src) {
+        e.preventDefault();
+        const card = btn.closest('.card');
+        const programName = card?.querySelector('h2')?.innerText || 'Program Dart';
+        openDartPad(src, programName);
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    modalIframe.src = 'about:blank';
+    while (modalBody.firstChild) {
+      modalBody.removeChild(modalBody.firstChild);
+    }
+    modalIframe.style.display = 'block';
+    modalBody.appendChild(modalIframe);
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      modalIframe.src = 'about:blank';
+      while (modalBody.firstChild) {
+        modalBody.removeChild(modalBody.firstChild);
+      }
+      modalIframe.style.display = 'block';
+      modalBody.appendChild(modalIframe);
+    }
+  });
+</script>
+</body>
+</html>
