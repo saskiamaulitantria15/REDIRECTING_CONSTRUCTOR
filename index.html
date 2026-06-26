@@ -1,472 +1,498 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Sesi 11: Redirecting Constructor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-      background: linear-gradient(145deg, #0b1120 0%, #111827 100%);
-      color: #f1f5f9;
-      line-height: 1.5;
-      padding-bottom: 3rem;
-    }
-    header {
-      text-align: center;
-      padding: 3rem 1.5rem;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(4px);
-      border-bottom: 1px solid rgba(59, 130, 246, 0.5);
-    }
-    header h1 {
-      font-size: 2.7rem;
-      background: linear-gradient(135deg, #a5f3fc, #60a5fa);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .subhead {
-      font-size: 1.1rem;
-      color: #cbd5e1;
-    }
-    .badge {
-      display: inline-block;
-      background: #1e293b;
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      margin-top: 0.8rem;
-    }
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-    .card {
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(2px);
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      border: 1px solid #2d3a5e;
-      transition: transform 0.1s ease, box-shadow 0.2s;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
-    .card:hover {
-      border-color: #3b82f6;
-      box-shadow: 0 12px 28px rgba(59, 130, 246, 0.2);
-    }
-    .card h2 {
-      font-size: 1.7rem;
-      margin-bottom: 0.75rem;
-      color: #93c5fd;
-      border-left: 5px solid #3b82f6;
-      padding-left: 1rem;
-    }
-    pre {
-      background: #0f172a;
-      border-radius: 1rem;
-      padding: 1rem;
-      overflow-x: auto;
-      font-family: 'Fira Code', 'Cascadia Code', monospace;
-      font-size: 0.85rem;
-      border: 1px solid #2d3a5e;
-      margin: 1rem 0;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .btn-run {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.4rem;
-      border-radius: 2rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.2s;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      margin-top: 0.5rem;
-    }
-    .btn-run:hover {
-      background: #1d4ed8;
-      transform: translateY(-2px);
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      border-top: 1px solid #1e293b;
-      color: #94a3b8;
-      font-size: 0.85rem;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background: #0f172a;
-      width: 90%;
-      max-width: 1100px;
-      height: 85%;
-      border-radius: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #3b82f6;
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid #334155;
-      color: #e2e8f0;
-    }
-    .modal-header h3 {
-      margin: 0;
-      font-size: 1.3rem;
-    }
-    .close {
-      font-size: 2rem;
-      font-weight: bold;
-      cursor: pointer;
-      color: #94a3b8;
-      line-height: 1;
-    }
-    .close:hover {
-      color: white;
-    }
-    .modal-body {
-      flex: 1;
-      padding: 0.5rem;
-    }
-    .modal-body iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 1rem;
-      background: #fefefe;
-    }
-  </style>
-</head>
-<body>
-<header>
-  <h1>Redirecting Constructor</h1>
-  <p class="subhead">Sesi 11 </p>
-  <div class="badge">👩‍💻 Saskia Mauli Tantria | 251410034 | SI2A</div>
-</header>
+<!DOCTYPE html>  <html lang="id">    <head>    
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Materi Sesi 11: Redirecting Constructors</title>    
+    <style>    
+        :root {    
+            --baby-pink: #FFD1DC;    
+            --pastel-yellow: #FFF9A6;    
+            --dark-text: #4A4A4A;    
+            --white: #FFFFFF;    
+        }  body {    
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+        background-color: var(--pastel-yellow);    
+        color: var(--dark-text);    
+        margin: 0;    
+        padding: 20px;    
+        display: flex;    
+        justify-content: center;    
+    }    .container {    
+    background-color: var(--white);    
+    max-width: 800px;    
+    width: 100%;    
+    padding: 40px;    
+    border-radius: 15px;    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);    
+    border: 4px solid var(--baby-pink);    
+}    
 
-<div class="container">
+h1 {    
+    color: #DB7093;    
+    text-align: center;    
+    border-bottom: 3px dashed var(--baby-pink);    
+    padding-bottom: 15px;    
+    margin-top: 0;    
+}    
 
-  <div class="card">
-    <h2>Main Constructor dengan Radius </h2>
-    <p>Main constructor merupakan constructor utama pada kelas Circle </p>
-    <p>yang menerima nilai radius secara langsung saat objek dibuat. Constructor</p>
-    <p>ini menjadi pusat inisialisasi data lingkaran dan digunakan oleh </p>
-    <p>constructor lain yang melakukan redirect.</p>
-    <pre><code>//Nama: Saskia Mauli Tantria 
-//NIM: 251410034
-//Kelas: SI2A
+h2 {    
+    color: #C71585;    
+    background-color: var(--pastel-yellow);    
+    padding: 8px 15px;    
+    border-radius: 8px;    
+    display: inline-block;    
+    font-size: 1.2rem;    
+    margin-top: 25px;    
+}    
 
-class Circle {
-  final double radius;
+ul, ol {    
+    padding-left: 20px;    
+    line-height: 1.6;    
+}    
 
-  Circle(this.radius);
+li {    
+    margin-bottom: 8px;    
+}    
+
+code {    
+    background-color: #FFF0F5;    
+    color: #C71585;    
+    padding: 2px 6px;    
+    border-radius: 4px;    
+    font-family: 'Courier New', Courier, monospace;    
+    font-size: 0.95rem;    
+    border: 1px solid var(--baby-pink);    
+}    
+
+hr {    
+    border: 0;    
+    height: 1px;    
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--baby-pink), rgba(0, 0, 0, 0));    
+    margin: 30px 0;    
+}    
+
+.nested-list {    
+    background-color: #FFFDF0;    
+    padding: 10px 20px;    
+    border-radius: 8px;    
+    margin-top: 5px;    
+    border-left: 3px solid var(--baby-pink);    
+}
+
+</style>  </head>    
+<body>  <div class="container">    
+    <h1>Sesi 11: Redirecting Constructors</h1>  <section>    
+    <h2>Review: Factory Constructors</h2>    
+    <ul>    
+        <li><strong>Format Penulisan:</strong> Menggunakan kata kunci <code>factory Class.name()</code>.</li>    
+        <li><strong>Karakteristik Utama:</strong> Tidak harus selalu membuat instance baru. Dapat mengembalikan objek yang sudah ada di memori atau objek dari kelas turunannya (subclass).</li>    
+        <li><strong>Skenario Penggunaan:</strong> Umumnya diterapkan untuk pembuatan pola singleton, mekanisme penyimpanan berbasis caching, atau pengelolaan kumpulan objek (object pools).</li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Pengantar Redirecting Constructors</h2>    
+    <ul>    
+        <li><strong>Definisi:</strong> Sebuah constructor yang tidak menginisialisasi objeknya secara mandiri, melainkan langsung "mengalihkan" atau meneruskan parameter panggilan ke constructor lain di dalam kelas yang sama.</li>    
+        <li><strong>Tujuan Utama:</strong> Meminimalkan penulisan kode yang berulang demi mematuhi prinsip DRY (Don't Repeat Yourself) agar struktur kode menjadi lebih bersih dan mudah dirawat.</li>    
+        <li><strong>Aturan Sintaksis:</strong> Pengalihan dilakukan dengan menuliskan <code>: this(...)</code> pada bagian initializer list (setelah nama constructor dan tanda titik dua).</li>    
+        <li><strong>Karakteristik Tubuh Kode:</strong> Constructor jenis ini tidak boleh memiliki body atau tidak memiliki blok tanda kurung kurawal <code>{ }</code>.</li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Sintaks Dasar Redirecting Constructor</h2>    
+    <ul>    
+        <li><strong>Struktur Kelas:</strong> Memiliki variabel utama <code>x</code> dan <code>y</code> yang bersifat <code>final</code>.</li>    
+        <li><strong>Constructor Utama:</strong> Berperan sebagai target pengalihan yang menerima parameter lengkap <code>Point(this.x, this.y)</code>.</li>    
+        <li><strong>Metode Pengalihan:</strong>    
+            <ul class="nested-list">    
+                <li><code>Point.origin()</code> dialihkan langsung menuju koordinat pusat <code>: this(0, 0)</code>.</li>    
+                <li><code>Point.onXAxis(double x)</code> dialihkan hanya dengan sumbu X <code>: this(x, 0)</code>.</li>    
+                <li><code>Point.onYAxis(double y)</code> dialihkan hanya dengan sumbu Y <code>: this(0, y)</code>.</li>    
+            </ul>    
+        </li>    
+        <li><strong>Eksekusi Utama (Main):</strong> Saat objek-objek tersebut dipanggil di fungsi utama (<code>void main</code>), sistem otomatis mengarahkan nilai bawaan tersebut ke constructor utama secara ringkas.</li>  
+      <pre><code>//Nama: Saskia Mauli Tantria
+      Nim: 251410034
+      Kelas: SI2A
+      
+  class Point {
+  final double x;
+  final double y;
+
+  // Konstruktor utama
+  Point(this.x, this.y) {
+        // print('Point created at ($x, $y)');
+  }
+
+  // Konstruktor pengarah (redirecting constructor) - mengarah ke konstruktor utama
+  Point.origin() : this(0, 0);
+
+  Point.onXAxis(double x) : this(x, 0);
+
+  Point.onYAxis(double y) : this(0, y);
 
   @override
   String toString() {
-    return 'Lingkaran dengan radius $radius';
+    return 'Point($x, $y)';
   }
 }
 
 void main() {
-  var lingkaran = Circle(10);
+  // Penggunaan
+  var origin = Point.origin(); // Point(0, 0)
+  var pointOnX = Point.onXAxis(5); // Point(5, 0)
+  var pointOnY = Point.onYAxis(3); // Point(0, 3)
 
-  print(lingkaran);
-}</code></pre>
-    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=ef5fa6d22a3180805cad6e7b10e17267&amp;run=true">Lihat Program</button>
-  </div>
+  // Cetak variabel origin, pointOnX, dan pointOnY
+  print('Origin: $origin');
+  print('Point on X-axis: $pointOnX');
+  print('Point on Y-axis: $pointOnY');
+} </code></pre>
+      <button class="btn-run" data-src="https://dartpad.dev//898769b77895161bd16d174f1cabcdca&amp;run=true">Lihat Program</button>
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Masalah Tanpa Redirecting Constructor</h2>    
+    <ul>    
+        <li><strong>Kendala Variabel Final:</strong> Variabel bertipe <code>final</code> (seperti <code>width</code> dan <code>height</code>) wajib diinisialisasi langsung saat objek dibuat dan nilainya tidak bisa diubah di dalam body <code>{ }</code>.</li>    
+        <li><strong>Kesalahan Duplikasi Logika (Error):</strong> Upaya mengisi nilai variabel final di dalam tubuh constructor (seperti contoh <code>width = side;</code> atau <code>width = 100;</code>) akan menghasilkan <strong>ERROR: final field</strong>.</li>    
+        <li><strong>Solusi Masalah:</strong> Untuk menghindari eror modifikasi variabel final tersebut, kode harus ditulis ulang menggunakan initializer list tradisional atau dialihkan secara bersih memakai redirecting constructor.</li>    
+      <pre><code>//Nama: Saskia Mauli Tantria
+      Nim: 251410034
+      Kelas: SI2A
 
-  <div class="card">
-    <h2>Redirecting dari Diameter</h2>
-    <p>Redirecting constructor dari diameter adalah constructor yang digunakan </p>
-    <p>untuk membuat objek Circle berdasarkan nilai diameter. Nilai </p>
-    <p>diameter akan diubah menjadi radius terlebih dahulu, kemudian diteruskan ke </p>
-    <p>constructor utama menggunakan this().</p>
-    <pre><code>//Nama: Saskia Mauli Tantria 
-//NIM: 251410034
-//Kelas: SI2A
-
-class Circle {
-  final double radius;
-
-  Circle(this.radius);
-
-  Circle.dariDiameter(double diameter)
-      : this(diameter / 2);
-
-  @override
-  String toString() {
-    return 'Lingkaran dengan radius $radius';
+  class Rectangle {
+  final double width;
+  final double height;
+  
+  Rectangle(this.width, this.height);
+  
+  // Tanpa redirecting - duplikasi logika
+  Rectangle.square(double side) {
+    width = side;    // ERROR: final field
+    height = side;
   }
-}
-
-void main() {
-  var lingkaran = Circle.dariDiameter(20);
-
-  print(lingkaran);
-}</code></pre>
-    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=965feb03974bd3b2d1843afd768c9f46&amp;run=true">Lihat Program</button>
-  </div>
-
-  <div class="card">
-    <h2>Redirecting dari Keliling</h2>
-    <p>Redirecting constructor dari keliling adalah constructor yang digunakan  </p>
-    <p>untuk membuat objek Circle berdasarkan nilai keliling lingkaran. </p>
-    <p>Radius dihitung dari keliling menggunakan rumus matematika, lalu </p>
-    <p>hasilnya diteruskan ke constructor utama.</p>
-    <pre><code>//Nama: Saskia Mauli Tantria 
-//NIM: 251410034
-//Kelas: SI2A
-
-import 'dart:math';
-
-class Circle {
-  final double radius;
-
-  Circle(this.radius);
-
-  Circle.dariKeliling(double keliling)
-      : this(keliling / (2 * pi));
-
-  @override
-  String toString() {
-    return 'Lingkaran dengan radius $radius';
+  
+  Rectangle.withDefault() {
+    width = 100;     // ERROR: final field
+    height = 50;
   }
-}
-
-void main() {
-  var lingkaran = Circle.dariKeliling(62.8);
-
-  print(lingkaran);
 }</code></pre>
-    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=a99f708f738b0ddbea152b08d96b930a&amp;run=true">Lihat Program</button>
-  </div>
+      <button class="btn-run" data-src="https://dartpad.dev//5ac0112a00eeeefb6230c7a44a7ea048&amp;run=true">Lihat Program</button>
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Solusi dengan Redirecting Constructor</h2>    
+    <ul>    
+        <li><strong>Struktur Solusi:</strong> Daripada mengisi nilai di dalam body <code>{ }</code> yang memicu eror, nilai langsung dioper ke constructor utama menggunakan sintaksis <code>: this(...)</code>.</li>    
+        <li><strong>Penerapan Kasus:</strong>    
+            <ul class="nested-list">    
+                <li><code>Rectangle.square(double side)</code> dialihkan menjadi persegi dengan mengirim parameter yang sama <code>: this(side, side)</code>.</li>    
+                <li><code>Rectangle.withDefault()</code> dialihkan untuk membuat ukuran bawaan <code>: this(100, 50)</code>.</li>    
+                <li><code>Rectangle.fromWidth(double width)</code> dialihkan menggunakan rumus matematika tertentu (misalnya Golden Ratio) <code>: this(width, width * 0.618)</code>.</li>    
+            </ul>    
+        </li>    
+      <pre><code>//Nama: Saskia Mauli Tantria
+      Nim: 251410034
+      Kelas: SI2A
 
-  <div class="card">
-    <h2>Redirecting dari Luas</h2>
-    <p>Redirecting constructor dari luas adalah constructor yang digunakan untuk </p>
-    <p>membuat objek Circle berdasarkan nilai luas lingkaran. Radius diperoleh dari </p>
-    <p>hasil perhitungan luas lingkaran dan kemudian digunakan untuk memanggil </p>
-    <p>constructor utama melalui this().</p>
-    <pre><code>//Nama: Saskia Mauli Tantria 
-//NIM: 251410034
-//Kelas: SI2A
-
-import 'dart:math';
-
-class Circle {
-  final double radius;
-
-  Circle(this.radius);
-
-  Circle.dariLuas(double luas)
-      : this(sqrt(luas / pi));
-
-  @override
-  String toString() {
-    return 'Lingkaran dengan radius $radius';
-  }
-}
-
-void main() {
-  var lingkaran = Circle.dariLuas(314);
-
-  print(lingkaran);
-}</code></pre>
-    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=062017c82fccd3962a8a78bed6f9b583&amp;run=true">Lihat Program</button>
-  </div>
-
-  <div class="card">
-    <h2>Implementasi Lengkap Redirecting Constructor pada Class Circle</h2>
-    <p>Class Circle adalah class yang digunakan untuk merepresentasikan objek lingkaran.</p>
-    <p>Class ini memiliki satu constructor utama yang menerima nilai radius dan tiga redirecting constructor </p>
-    <p>yang dapat membuat objek berdasarkan diameter, keliling, dan luas. Redirecting constructor menggunakan sintaks :</p>
-    <p>this(...) untuk mengarahkan proses pembuatan objek ke constructor utama sehingga kode menjadi lebih ringkas dan</p>
-    <p>menghindari duplikasi.</p>
-    <pre><code>//Nama: Saskia Mauli Tantria 
-//NIM: 251410034
-//Kelas: SI2A
-
-import 'dart:math';
-
-class Circle {
-  final double radius;
-
+class Rectangle {
+  final double width;
+  final double height;
+  
   // Main constructor
-  Circle(this.radius);
-
-  // Redirecting constructor dari diameter
-  Circle.dariDiameter(double diameter)
-      : this(diameter / 2);
-
-  // Redirecting constructor dari keliling
-  Circle.dariKeliling(double keliling)
-      : this(keliling / (2 * pi));
-
-  // Redirecting constructor dari luas
-  Circle.dariLuas(double luas)
-      : this(sqrt(luas / pi));
+  Rectangle(this.width, this.height) {
+    print('Rectangle $width x $height created');
+  }
+  
+  // Redirecting constructor
+  Rectangle.square(double side) : this(side, side);
+  
+  Rectangle.withDefault() : this(100, 50);
+  
+  Rectangle.fromWidth(double width) : this(width, width * 0.618); // Golden ratio
 
   @override
   String toString() {
-    return 'Lingkaran dengan radius $radius';
+    return 'Rectangle(width: ${width.toStringAsFixed(2)}, height: ${height.toStringAsFixed(2)})';
+  }
+}
+
+void main(){
+// Penggunaan
+var square = Rectangle.square(10);      // 10x10
+var defaultRect = Rectangle.withDefault(); // 100x50
+var goldenRect = Rectangle.fromWidth(100); // 100x61.8
+
+print('Square: $square');
+print('Default Rectangle: $defaultRect');
+print('Golden Ratio Rectangle: $goldenRect');
+}</code></pre>
+      <button class="btn-run" data-src="https://dartpad.dev//a75981eebe358ae288c3d991ca66a4bc&amp;run=true">Lihat Program</button>
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Redirecting Constructor dengan Named Parameters</h2>    
+    <ul>    
+        <li><strong>Karakteristik Target:</strong> Constructor utama (<code>Person</code>) menggunakan parameter bernama dengan kata kunci <code>required</code> untuk validasi input wajib.</li>    
+        <li><strong>Aturan Pengalihan:</strong> Saat mengalihkan, nama parameter wajib ditulis secara eksplisit di dalam <code>this(...)</code>.</li>    
+        <li><strong>Penerapan Nilai Default:</strong>    
+            <ul class="nested-list">    
+                <li><code>Person.anonymous()</code> mengalihkan nama ke 'Anonymous' dan usia ke 0 via <code>: this(name: 'Anonymous', age: 0)</code>.</li>    
+                <li><code>Person.adult(String name)</code> mengunci nilai usia langsung ke angka 18 via <code>: this(name: name, age: 18)</code>.</li>    
+                <li><code>Person.child(String name, int years)</code> meneruskan variabel lokal 'years' ke parameter 'age' via <code>: this(name: name, age: years, email: null)</code>.</li>    
+            </ul>    
+        </li>  
+      <pre><code>//Nama: Saskia Mauli Tantria
+      Nim: 251410034
+      Kelas: SI2A
+
+      //Nama: Saskia Mauli Tantria
+//Nim: 251410034
+//Kelas: SI2A
+
+class Person {
+  final String name;
+  final int age;
+  final String? email;
+
+  // Main constructor dengan named parameters
+  Person({
+    required this.name,
+    required this.age,
+    this.email,
+  });
+
+  // Redirecting dengan default values
+  Person.anonymous() : this(name: 'Anonymous', age: 0);
+
+  Person.fromName(String name) : this(name: name, age: 0);
+
+  Person.adult(String name) : this(name: name, age: 18);
+
+  Person.child(String name, int years) : this(name: name, age: years, email: null);
+
+  @override
+  String toString() {
+    return 'Name: $name, Age: $age, Email: ${email ?? "N/A"}';
   }
 }
 
 void main() {
-  var lingkaran1 = Circle(10);
-  var lingkaran2 = Circle.dariDiameter(20);
-  var lingkaran3 = Circle.dariKeliling(62.8);
-  var lingkaran4 = Circle.dariLuas(314);
+  print('Demonstrating Person class constructors:\n');
 
-  print('Main Constructor');
-  print(lingkaran1);
+  // Using the main constructor with required named parameters
+  var john = Person(name: 'John Doe', age: 30, email: 'john.doe@example.com');
+  print('1. Main constructor (John): ${john.toString()}');
 
-  print('\nRedirecting dari Diameter');
-  print(lingkaran2);
+  // Using the main constructor without an optional parameter
+  var jane = Person(name: 'Jane Smith', age: 25);
+  print('2. Main constructor (Jane, no email): ${jane.toString()}');
 
-  print('\nRedirecting dari Keliling');
-  print(lingkaran3);
+  // Using Person.anonymous()
+  var anonymous = Person.anonymous();
+  print('3. Person.anonymous(): ${anonymous.toString()}');
 
-  print('\nRedirecting dari Luas');
-  print(lingkaran4);
+  // Using Person.fromName(String name)
+  var bob = Person.fromName('Bob');
+  print('4. Person.fromName(\'Bob\'): ${bob.toString()}');
+
+  // Using Person.adult(String name)
+  var alice = Person.adult('Alice');
+  print('5. Person.adult(\'Alice\'): ${alice.toString()}');
+
+  // Using Person.child(String name, int years)
+  var charlie = Person.child('Charlie', 7);
+  print('6. Person.child(\'Charlie\', 7): ${charlie.toString()}');
+
+  var diana = Person.child('Diana', 12);
+  print('7. Person.child(\'Diana\', 12): ${diana.toString()}');
 }</code></pre>
-    <button class="btn-run" data-src="https://dartpad.dev/embed-dart.html?id=9f7023f861a3476ec824178377c53703&amp;run=true">Lihat Program</button>
-  </div>
+      <button class="btn-run" data-src="https://dartpad.dev//7f1ee8227059f5a1c03a48d027e5807c&amp;run=true">Lihat Program</button>
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Praktik 1 – Configuration Class</h2>    
+    <ul>    
+        <li><strong>Fungsi Utama:</strong> Memusatkan semua pengaturan koneksi basis data (seperti host, port, username, password, database, dan status SSL) ke satu constructor utama.</li>    
+        <li><strong>Pengalihan Profil Lingkungan (Environment):</strong>    
+            <ul class="nested-list">    
+                <li><code>DatabaseConfig.development()</code> otomatis mengalihkan konfigurasi ke server lokal pengembangan dengan kredensial bawaan (localhost, user pengembang, dan SSL nonaktif).</li>    
+                <li><code>DatabaseConfig.production()</code> mengalihkan konfigurasi ke server produksi dengan keamanan ketat (menggunakan domain asli, kredensial produksi, dan mewajibkan SSL aktif).</li>    
+                <li><code>DatabaseConfig.localhost()</code> menyederhanakan panggilan khusus pengujian lokal tanpa perlu menuliskan detail parameter berulang kali.</li>    
+            </ul>    
+        </li>    
+        <li><strong>Pengalihan Parameter Sebagian:</strong> Menyediakan constructor fleksibel yang hanya meminta nama host dan nama basis data saja, sementara nilai parameter lainnya diisi oleh nilai default sistem melalui pengalihan.</li>    
+      <pre><code>//Nama: Saskia Mauli Tantria
+      Nim: 251410034
+      Kelas: SI2A
 
-  <div class="card">
-    <h2>Kesimpulan</h2>
-    <p>- Redirecting Constructor adalah constructor yang digunakan untuk memanggil constructor lain yang berada</p>
-    <p> dalam class yang sama dengan menggunakan sintaks : this(...).</p>
-    <p>- Constructor ini membantu menghindari penulisan kode yang berulang pada proses inisialisasi objek. </p>
-    <p>- Redirecting Constructor tidak memiliki body karena hanya bertugas meneruskan parameter ke constructor yang dituju.</p>
-    <p>- Constructor ini sering digunakan untuk membuat beberapa cara pembuatan objek dalam satu class.</p>
-    <p>- Penggunaannya membuat kode lebih ringkas, terorganisir, dan lebih mudah dipelihara.</p>
-    <p>- Redirecting Constructor mendukung prinsip DRY (Don't Repeat Yourself) dengan mengurangi duplikasi kode.</p>
-  </div>
-</div>
+      //Nama: Saskia Mauli Tantria
+//Nim: 251410034
+//Kelas: SI2A
 
-<footer>
-  <p>📁 Sesi 11  – | Dibuat untuk GitHub Pages</p>
-  <p>Saskia Mauli Tantria — 251410034 — SI2A</p>
-</footer>
+class DatabaseConfig {
+  final String host;
+  final int port;
+  final String username;
+  final String password;
+  final String database;
+  final bool useSSL;
 
-<div id="codeModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="modalTitle">DartPad Runner</h3>
-      <span class="close" id="closeModalBtn">&times;</span>
-    </div>
-    <div class="modal-body">
-      <iframe id="dartpadIframe" title="DartPad" src="about:blank"></iframe>
-    </div>
-  </div>
-</div>
+  // Konstruktor utama
+  DatabaseConfig({
+    required this.host,
+    required this.port,
+    required this.username,
+    required this.password,
+    required this.database,
+    this.useSSL = false,
+  });
 
-<script>
-  const modal = document.getElementById('codeModal');
-  const modalIframe = document.getElementById('dartpadIframe');
-  const closeBtn = document.getElementById('closeModalBtn');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalBody = document.querySelector('.modal-body');
+  // Konstruktor redirecting untuk lingkungan berbeda
+  DatabaseConfig.development()
+      : this(
+          host: 'localhost',
+          port: 5432,
+          username: 'dev_user',
+          password: 'dev_pass',
+          database: 'dev_db',
+          useSSL: false,
+        );
 
-  function openDartPad(embedUrl, programTitle) {
-    while (modalBody.firstChild) {
-      modalBody.removeChild(modalBody.firstChild);
-    }
-    modalIframe.style.display = 'block';
-    modalBody.appendChild(modalIframe);
-    modalIframe.src = embedUrl;
-    modalTitle.innerText = programTitle;
-    modal.style.display = 'flex';
+  DatabaseConfig.production()
+      : this(
+          host: 'db.example.com',
+          port: 5432,
+          username: 'prod_user',
+          password: 'prod_pass',
+          database: 'prod_db',
+          useSSL: true,
+        );
+
+  DatabaseConfig.localhost()
+      : this(
+          host: 'localhost',
+          port: 3306,
+          username: 'root',
+          password: '',
+          database: 'test',
+        );
+
+  // Konstruktor redirecting dengan sebagian parameter
+  DatabaseConfig.withHost(String host, String database)
+      : this(
+          host: host,
+          port: 5432,
+          username: 'default',
+          password: 'password',
+          database: database,
+        );
+
+  @override
+  String toString() {
+    return 'DatabaseConfig(\n'
+        '  host: $host,\n'
+        '  port: $port,\n'
+        '  username: $username,\n'
+        '  password: ${'*' * password.length},\n' // Masker kata sandi untuk tampilan
+        '  database: $database,\n'
+        '  useSSL: $useSSL\n'
+        ')';
   }
+}
 
-  window.openImage = function(imgUrl) {
-    while (modalBody.firstChild) {
-      modalBody.removeChild(modalBody.firstChild);
-    }
-    modalIframe.style.display = 'none';
-    const img = document.createElement('img');
-    img.src = imgUrl;
-    img.alt = 'Capture Gambar';
-    img.style.maxWidth = '100%';
-    img.style.maxHeight = '70vh';
-    img.style.width = 'auto';
-    img.style.height = 'auto';
-    img.style.display = 'block';
-    img.style.margin = 'auto';
-    img.style.borderRadius = '12px';
-    img.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
-    img.style.objectFit = 'contain';
-    img.onerror = () => {
-      img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2"%3E%3Crect x="2" y="2" width="20" height="20" rx="2" /%3E%3Cpath d="M8 8 L16 16 M16 8 L8 16" /%3E%3Ctext x="12" y="20" font-size="8" text-anchor="middle" fill="red"%3EGagal load%3C/text%3E%3C/svg%3E';
-      img.style.width = '150px';
-      img.style.height = 'auto';
-    };
-    modalBody.appendChild(img);
-    modalTitle.innerText = '📸 Capture Gambar';
-    modal.style.display = 'flex';
-  };
+void main() {
+  print('--- Konfigurasi Database ---');
 
-  document.querySelectorAll('.btn-run').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const src = btn.getAttribute('data-src');
-      if (src) {
-        e.preventDefault();
-        const card = btn.closest('.card');
-        const programName = card?.querySelector('h2')?.innerText || 'Program Dart';
-        openDartPad(src, programName);
-      }
-    });
-  });
+  // 1. Menggunakan konstruktor utama
+  final customConfig = DatabaseConfig(
+    host: 'my.custom.server',
+    port: 1234,
+    username: 'admin',
+    password: 'secure_password',
+    database: 'important_data',
+    useSSL: true,
+  );
+  print('\n[Konfigurasi Kustom]');
+  print(customConfig);
 
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-    modalIframe.src = 'about:blank';
-    while (modalBody.firstChild) {
-      modalBody.removeChild(modalBody.firstChild);
-    }
-    modalIframe.style.display = 'block';
-    modalBody.appendChild(modalIframe);
-  });
+  // 2. Menggunakan konstruktor development
+  final devConfig = DatabaseConfig.development();
+  print('\n[Konfigurasi Development]');
+  print(devConfig);
 
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      modalIframe.src = 'about:blank';
-      while (modalBody.firstChild) {
-        modalBody.removeChild(modalBody.firstChild);
-      }
-      modalIframe.style.display = 'block';
-      modalBody.appendChild(modalIframe);
-    }
-  });
-</script>
-</body>
-</html>
+  // 3. Menggunakan konstruktor production
+  final prodConfig = DatabaseConfig.production();
+  print('\n[Konfigurasi Production]');
+  print(prodConfig);
+
+  // 4. Menggunakan konstruktor localhost
+  final localConfig = DatabaseConfig.localhost();
+  print('\n[Konfigurasi Localhost]');
+  print(localConfig);
+
+  // 5. Menggunakan konstruktor withHost
+  final specificHostConfig =
+      DatabaseConfig.withHost('another.server.net', 'my_app_db');
+  print('\n[Konfigurasi dengan host dan database spesifik]');
+  print(specificHostConfig);
+
+  print('\n--- Akhir Konfigurasi ---');
+}</code></pre>
+      <button class="btn-run" data-src="https://dartpad.dev//0fbdf8c99517bfbca2d8a3123b6ee8f4&amp;run=true">Lihat Program</button>
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Redirecting Constructor dengan Validasi</h2>    
+    <ul>    
+        <li><strong>Constructor Utama Privat:</strong> Memanfaatkan constructor utama yang bersifat privat (<code>BankAccount._(...)</code>) agar pembuatan objek tidak bisa dilakukan secara sembarangan dari luar kelas.</li>    
+        <li><strong>Penggabungan dengan Factory:</strong> Menggunakan <code>factory BankAccount.create(...)</code> untuk menjembatani proses validasi sebelum objek benar-benar dibuat.</li>    
+</ul>  
+</section>  
+<hr>    <section>    
+    <h2>Multiple Redirecting Levels</h2>    
+    <ul>    
+        <li><strong>Struktur Dasar Objek:</strong> Kelas <code>Product</code> memiliki banyak properti wajib seperti id, name, price, category, stock, hingga tanggal kedaluwarsa expiryDate.</li>    
+        <li><strong>Tingkatan Pengalihan (Redirection Levels):</strong>    
+            <ul class="nested-list">    
+                <li><strong>Level 1 Redirecting (Basic):</strong> Constructor hanya meminta data paling esensial (id, name, price). Properti lainnya diisi otomatis dengan nilai default standar (kategori 'General' dan stok 0) lalu dialihkan ke constructor utama.</li>    
+                <li><strong>Level 2 Redirecting (With Category):</strong> Memberikan tingkat fleksibilitas lebih dengan mengizinkan input kategori khusus dari pengguna, sementara nilai stok tetap dikunci otomatis ke angka 0 sebelum dialihkan.</li>    
+                <li><strong>Level 3 Redirecting (Full Custom):</strong> Mengizinkan pengisian seluruh parameter secara kustom termasuk tanggal kedaluwarsa opsional, yang kemudian diteruskan secara utuh ke penampung utama.</li>    
+            </ul>    
+        </li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Redirecting Constructor vs Factory Constructor</h2>    
+    <ul>    
+        <li><strong>Tujuan:</strong> Redirecting memanggil constructor lain di class yang sama, sedangkan Factory menangani logic kompleks, caching, atau subclass.</li>    
+        <li><strong>Return:</strong> Redirecting harus mengembalikan instance class tersebut, sedangkan Factory bisa mengembalikan instance yang sudah ada atau subclass.</li>    
+        <li><strong>Body:</strong> Redirecting tidak memiliki body (hanya ekspresi <code>: this(...)</code>), sedangkan Factory memiliki body lengkap berisi logika.</li>    
+        <li><strong>Final fields:</strong> Redirecting mendukung proses inisialisasi variabel final, sedangkan Factory tidak bisa langsung menginisialisasi di dalam body.</li>    
+        <li><strong>Use case:</strong> Redirecting untuk default parameters dan convenience, sedangkan Factory untuk singleton, object pool, dan polymorphism.</li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Praktik 2 – API Response dengan Redirecting</h2>    
+    <ul>    
+        <li><strong>Fokus Kasus:</strong> Memetakan dan mengelola berbagai status respons dari server (seperti respons sukses, respons eror/gagal, atau data kosong) ke dalam sebuah kelas objek tunggal (<code>ApiResponse</code>).</li>    
+        <li><strong>Tujuan Latihan:</strong> Menyederhanakan penulisan status aplikasi dengan cara menyediakan constructor pengalihan khusus untuk setiap skenario respons (seperti success, error, notFound, dan unauthorized), sehingga kode di sisi antarmuka menjadi lebih bersih saat membaca data.</li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Redirecting Constructor dengan Initializer List</h2>    
+    <ul>    
+        <li><strong>Pengalihan Parameter Tambahan:</strong> Mengisi otomatis properti bawaan seperti ID unik menggunakan timestamp milidetik, nama pengguna bawaan, dan status aktif false.</li>    
+        <li><strong>Pengalihan dengan Kalkulasi Nilai:</strong> Memproses string input terlebih dahulu (misalnya mengubah nama menjadi huruf kecil semua atau merangkai string email baru) sebelum dilempar ke constructor utama.</li>    
+        <li><strong>Validasi di dalam Tubuh Kode:</strong> Menunjukkan bahwa jika constructor pengalihan membutuhkan pemeriksaan logika yang kompleks, validasi tersebut harus dilakukan sebelum tanda pengalihan selesai dieksekusi agar tidak memicu eror pada variabel final.</li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Best Practices Redirecting Constructor</h2>    
+    <ul>    
+        <li><strong>Gunakan untuk:</strong> Default parameter values, convenience constructors, and alternative ways to create objects.</li>    
+        <li><strong>Hindari untuk:</strong> Complex logic (gunakan factory), Caching (gunakan factory), dan Subclass creation (gunakan factory).</li>    
+        <li><strong>Tips:</strong> Jaga agar rantai pengalihan tetap pendek, dokumentasikan tujuan setiap constructor, dan gunakan nama yang bermakna pada named constructor.</li>    
+    </ul>    
+</section>    <hr>    <section>    
+    <h2>Ringkasan &amp; Latihan</h2>    
+    <ul>    
+        <li><strong>Ringkasan:</strong>    
+            <ol>    
+                <li>Sintaksis penulisan wajib menggunakan <code>: this(...)</code> tanpa body.</li>    
+                <li>Untuk memanggil constructor lain di class yang sama.</li>    
+                <li>Mengurangi duplikasi kode.</li>    
+                <li>Tidak bisa berisi logic kompleks.</li>    
+            </ol>    
+        </li> 
+</section>  </div>  </body>    
+</html>  
