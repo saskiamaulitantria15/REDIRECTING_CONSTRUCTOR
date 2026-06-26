@@ -8,6 +8,14 @@
             --pastel-yellow: #FFF9A6;    
             --dark-text: #4A4A4A;    
             --white: #FFFFFF;    
+<script>
+document.querySelectorAll('.btn-run').forEach(btn => {
+  btn.addEventListener('click', () => {
+    window.open(btn.dataset.src, '_blank');
+  });
+});
+</script>
+        
         }  body {    
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
         background-color: var(--pastel-yellow);    
@@ -145,7 +153,7 @@ void main() {
   print('Point on X-axis: $pointOnX');
   print('Point on Y-axis: $pointOnY');
 } </code></pre>
-      <button class="btn-run" data-src="https://dartpad.dev//898769b77895161bd16d174f1cabcdca&amp;run=true">Lihat Program</button>
+      <button class="btn-run" data-src="https://dartpad.dev//898769b77895161bd16d174f1cabcdca?run=true">Lihat Program</button>
     </ul>    
 </section>    <hr>    <section>    
     <h2>Masalah Tanpa Redirecting Constructor</h2>    
@@ -174,7 +182,7 @@ void main() {
     height = 50;
   }
 }</code></pre>
-      <button class="btn-run" data-src="https://dartpad.dev//5ac0112a00eeeefb6230c7a44a7ea048&amp;run=true">Lihat Program</button>
+      <button class="btn-run" data-src="https://dartpad.dev//5ac0112a00eeeefb6230c7a44a7ea048?run=true">Lihat Program</button>
     </ul>    
 </section>    <hr>    <section>    
     <h2>Solusi dengan Redirecting Constructor</h2>    
@@ -223,7 +231,7 @@ print('Square: $square');
 print('Default Rectangle: $defaultRect');
 print('Golden Ratio Rectangle: $goldenRect');
 }</code></pre>
-      <button class="btn-run" data-src="https://dartpad.dev//a75981eebe358ae288c3d991ca66a4bc&amp;run=true">Lihat Program</button>
+      <button class="btn-run" data-src="https://dartpad.dev//a75981eebe358ae288c3d991ca66a4bc?run=true">Lihat Program</button>
     </ul>    
 </section>    <hr>    <section>    
     <h2>Redirecting Constructor dengan Named Parameters</h2>    
@@ -302,7 +310,7 @@ void main() {
   var diana = Person.child('Diana', 12);
   print('7. Person.child(\'Diana\', 12): ${diana.toString()}');
 }</code></pre>
-      <button class="btn-run" data-src="https://dartpad.dev//7f1ee8227059f5a1c03a48d027e5807c&amp;run=true">Lihat Program</button>
+      <button class="btn-run" data-src="https://dartpad.dev//7f1ee8227059f5a1c03a48d027e5807c?run=true">Lihat Program</button>
     </ul>    
 </section>    <hr>    <section>    
     <h2>Praktik 1 – Configuration Class</h2>    
@@ -433,7 +441,7 @@ void main() {
 
   print('\n--- Akhir Konfigurasi ---');
 }</code></pre>
-      <button class="btn-run" data-src="https://dartpad.dev//0fbdf8c99517bfbca2d8a3123b6ee8f4&amp;run=true">Lihat Program</button>
+      <button class="btn-run" data-src="https://dartpad.dev//0fbdf8c99517bfbca2d8a3123b6ee8f4?run=true">Lihat Program</button>
     </ul>    
 </section>    <hr>    <section>    
     <h2>Redirecting Constructor dengan Validasi</h2>    
@@ -484,7 +492,7 @@ void main() {
         <li><strong>Tips:</strong> Jaga agar rantai pengalihan tetap pendek, dokumentasikan tujuan setiap constructor, dan gunakan nama yang bermakna pada named constructor.</li>    
     </ul>    
 </section>    <hr>    <section>    
-    <h2>Ringkasan &amp; Latihan</h2>    
+    <h2>Ringkasan</h2>    
     <ul>    
         <li><strong>Ringkasan:</strong>    
             <ol>    
